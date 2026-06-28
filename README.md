@@ -35,7 +35,7 @@ tests/
   test_authorization.py    # класс TestAuthorization
   test_recipe_creation.py  # класс TestRecipeCreation
 assets/test_image.png      # фото для загрузки рецепта
-browsers.json       # конфигурация браузеров Selenoid
+config/browsers.json       # конфигурация браузеров Selenoid
 Dockerfile  docker-compose.yml  .github/workflows/ci.yml
 allure-report/             # сгенерированный отчёт
 ```
