@@ -1,0 +1,40 @@
+services:
+  selenoid:
+    image: aerokube/selenoid:latest-release
+    container_name: selenoid
+    restart: unless-stopped
+    ports:
+      - "4444:4444"
+    volumes:
+      # browsers.json lives in ./config
+      - ./config:/etc/selenoid
+      # Selenoid spawns browser containers through the host Docker daemon
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - "-conf"
+      - "/etc/selenoid/browsers.json"
+      - "-limit"
+      - "4"
+      # browser containers must share the network so Selenoid can reach them
+      - "-container-network"
+      - "selenoid-net"
+    networks:
+      - selenoid-net
+
+  tests:
+    build: .
+    depends_on:
+      - selenoid
+    volumes:
+      # raw Allure results are written back to the host
+      - ./allure-results:/tests/allure-results
+    command:
+      - "pytest"
+      - "--selenoid-uri=http://selenoid:4444/wd/hub"
+      - "--browser-version=128.0"
+    networks:
+      - selenoid-net
+
+networks:
+  selenoid-net:
+    name: selenoid-net

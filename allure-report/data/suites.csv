@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1500","Создание рецепта отображает карточку с введённым названием","tests","2026-06-28","passed","2026-06-28","TestRecipeCreation","test_recipe_creation","",""
+"","746","Авторизация по логину открывает главную страницу","tests","2026-06-28","passed","2026-06-28","TestAuthorization","test_authorization","",""
+"","1196","Регистрация нового аккаунта открывает страницу авторизации","tests","2026-06-28","passed","2026-06-28","TestRegistration","test_registration","",""
