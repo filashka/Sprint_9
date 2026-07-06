@@ -1,5 +1,7 @@
 import allure
 
+from data.urls import RECIPES_PATH
+
 
 @allure.feature("Авторизация")
 class TestAuthorization:
@@ -10,4 +12,4 @@ class TestAuthorization:
         assert main_page.is_logout_displayed(), (
             "Кнопка Выход не отображается — вход не выполнен"
         )
-        assert "/recipes" in main_page.current_url
+        assert RECIPES_PATH in main_page.current_url

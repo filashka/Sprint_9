@@ -7,7 +7,6 @@ from selenium.webdriver.chrome.options import Options
 
 from data.urls import BASE_URL
 from data.users import generate_user
-from data.recipes import generate_recipe
 from page_objects.main_page import MainPage
 from page_objects.signup_page import SignUpPage
 from page_objects.signin_page import SignInPage
@@ -56,16 +55,6 @@ def driver(request):
 
 
 @pytest.fixture
-def new_user():
-    return generate_user()
-
-
-@pytest.fixture
-def new_recipe():
-    return generate_recipe()
-
-
-@pytest.fixture
 def main_page(driver, base_url):
     return MainPage(driver, base_url)
 
@@ -91,11 +80,12 @@ def recipe_page(driver, base_url):
 
 
 @pytest.fixture
-def registered_user(signup_page, new_user):
+def registered_user(signup_page):
     """Precondition: a user registered through the UI. Returns its credentials."""
+    user = generate_user()
     signup_page.open_signup()
-    signup_page.register(new_user)
-    return new_user
+    signup_page.register(user)
+    return user
 
 
 @pytest.fixture
